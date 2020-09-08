@@ -1,17 +1,17 @@
 __author__ = "Edward J. C. Ashenbert"
-__version__ = "1.0.1"
+__version__ = "2.0.7"
 __status__ = "20200908_1037"
 
-import
-NavigationSystemShareMemory as navigation_system_share_memory
 import PyLidar3
-from AStar_5 import *
-from PVector import PVector
-from RobotGM6020 import RobotControl
-from SensorIMU import IMU
-from UtilitiesFunction import *
-from UtilitiesMacroAndConstant import *
-from Vehicle import Vehicle
+
+import NavigationSystemROS.NavigationSystemClient.NavigationSystemShareMemory as navigation_system_share_memory
+from NavigationSystemUltilities.AStar_5 import *
+from NavigationSystemUltilities.PVector import PVector
+from NavigationSystemUltilities.Robot import Robot
+from NavigationSystemUltilities.SensorIMU import IMU
+from NavigationSystemUltilities.UtilitiesFunction import *
+from NavigationSystemUltilities.UtilitiesMacroAndConstant import *
+from NavigationSystemUltilities.Vehicle import Vehicle
 
 OS_PATH = "/home/alpha64/Desktop/MR-Navigation-System-ROS/NavigationSystem/NavigationSystem/NavigationSystem/"
 DATE_TIME = "NavigationSystemTestResult/" + datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -54,9 +54,9 @@ class NavigationSystemModel():
 
         if robot_port:
             print("Initialize robot ......")
-            self.robot = RobotControl(robot_port, robot_baudrate)
-            self.robot.write_drive_command('n,0,0,0,0;')
-            self.robot.write_steer_command('q,0,0,0,0;')
+            self.robot = Robot(robot_port, robot_baudrate)
+            self.robot.write_command('n,0,0,0,0;')
+            self.robot.write_command('q,0,0,0,0;')
             print("Done initialize robot ......")
             self.system_state += 1
         else:
